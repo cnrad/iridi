@@ -1,5 +1,6 @@
 import sys, math
 
+# Print all colors
 for i in range(0, 16):
     for j in range(0, 16):
         code = str(i * 16 + j)
@@ -13,11 +14,12 @@ class colors:
     red_to_pink = 160
     orange_to_magenta = 202
     green_to_blue = 28
+    # need to list all gradients, come up with scalable names
 
 def gradient(string, color):
 
-    # if color not in colors:
-    #     return print("not a color bruh lmfao u dumb")
+    # if not colors[color]:
+    #     print('bruh pick again')
 
     length = len(string)
     index = 0
@@ -35,7 +37,34 @@ def gradient(string, color):
 
     print (u"\u001b[0m")
 
+gradient("Hello, tester.", colors.red_to_pink)
+gradient("iridi - beautify your console.logs", colors.orange_to_magenta)
 
-gradient("This is a test for gradient strings.", colors.red_to_pink)
-gradient("This is a another test for gradient strings, but longer.", colors.orange_to_magenta)
-gradient("Very cool af.", colors.green_to_blue)
+print("\x1b[38;2;40;177;249m test \u001b[0m")
+
+
+
+def testgradient(string, colorArr):
+
+    # if not colors[color]:
+    #     print('bruh pick again')
+
+    length = len(string)
+    index = 0
+    array = []
+
+    red = 100
+    green = 0
+    blue = 20
+
+    for j in range(0, 105):
+
+        red += 1
+        blue += 1
+        green += 1
+
+        print(f"\x1b[38;2;{red};{green};{blue}m" + "a")
+
+    print (u"\u001b[0m")
+
+testgradient("Try this string I suppose", [{"r": 200, "g": 255, "b": 100}, {"r": 100, "g": 55, "b": 250}])
