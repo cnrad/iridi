@@ -1,14 +1,11 @@
 import sys, math
 
-# Print all colors
-for i in range(0, 16):
-    for j in range(0, 16):
-        code = str(i * 16 + j)
-        sys.stdout.write(u"\u001b[38;5;" + code + "m " + code.ljust(4))
-    print (u"\u001b[0m")
-
-# ansi colors: 0-16 base colors. 17+ are gradients in groups of 5
-# idea: split string into 5 sections, gradient it
+# # Print all colors
+# for i in range(0, 16):
+#     for j in range(0, 16):
+#         code = str(i * 16 + j)
+#         sys.stdout.write(u"\u001b[38;5;" + code + "m " + code.ljust(4))
+#     print (u"\u001b[0m")
 
 class colors:
     red_to_pink = 160
@@ -37,34 +34,48 @@ def gradient(string, color):
 
     print (u"\u001b[0m")
 
-gradient("Hello, tester.", colors.red_to_pink)
-gradient("iridi - beautify your console.logs", colors.orange_to_magenta)
-
-print("\x1b[38;2;40;177;249m test \u001b[0m")
+# gradient("Hello, tester.", colors.red_to_pink)
+# gradient("iridi - beautify your console.logs", colors.orange_to_magenta)
 
 
 
-def testgradient(string, colorArr):
-
-    # if not colors[color]:
-    #     print('bruh pick again')
+def testgradient(string, colorArr, bold=False):
 
     length = len(string)
-    index = 0
-    array = []
+    colorStops = len(colorArr);
 
-    red = 100
-    green = 0
-    blue = 20
+    if type(colorArr[0]) == str and colorArr[0].startswith("#"):
+        for i in range(0, colorStops):
+            color = colorArr[i].lstrip("#")
+            rgbColors = tuple(int(color[i:i+2], 16) for i in (0, 2, 4))
 
-    for j in range(0, 105):
+            colorArr[i] = {
+                "r": rgbColors[0],
+                "g": rgbColors[1],
+                "b": rgbColors[2],
+            }
 
-        red += 1
-        blue += 1
-        green += 1
+    r = int(colorArr[0]["r"])
+    g = int(colorArr[0]["g"])
+    b = int(colorArr[0]["b"])
 
-        print(f"\x1b[38;2;{red};{green};{blue}m" + "a")
+    for i in range(0, colorStops):
+        diffR = int(colorArr[1]["r"] - r)
+        diffG = int(colorArr[1]["g"] - g)
+        diffB = int(colorArr[1]["b"] - b)
+
+    print('\033[1m') if bold else ''
+
+    for i in range(0, length):
+
+        print(f"\x1b[38;2;{r};{g};{b}m" + string[i], end = '')
+
+        r += int(diffR/length)
+        g += int(diffG/length)
+        b += int(diffB/length)
 
     print (u"\u001b[0m")
 
-testgradient("Try this string I suppose", [{"r": 200, "g": 255, "b": 100}, {"r": 100, "g": 55, "b": 250}])
+testgradient("Try this string I suppose maybe even a longer one if I want", [{"r": 238, "g": 9, "b": 121}, {"r": 255, "g": 106, "b": 0}], bold=True)
+testgradient("Try this string I suppose maybe even a longer one if I want", [{"r": 238, "g": 9, "b": 121}, {"r": 255, "g": 106, "b": 0}])
+testgradient("Try this string I suppose maybe even a longer one if I want", ["#fafa3b", "#ab8290"])
