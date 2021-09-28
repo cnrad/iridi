@@ -10,12 +10,11 @@ import sys, math
 def testgradient(string, colorArr, bold=False):
 
     length = len(string)
-    colorStops = len(colorArr);
-    sectionLength = math.floor(length/(colorStops - 1))
-    diffs = {}
+    colorStopsCount = len(colorArr);
+    sectionLength = math.floor(length/(colorStopsCount - 1))
 
     if type(colorArr[0]) == str and colorArr[0].startswith("#"):
-        for i in range(0, colorStops):
+        for i in range(0, colorStopsCount):
             color = colorArr[i].lstrip("#")
             rgbColors = tuple(int(color[i:i+2], 16) for i in (0, 2, 4))
 
@@ -33,10 +32,9 @@ def testgradient(string, colorArr, bold=False):
 
     index = 0
 
-    for i in range(1, colorStops):
+    for i in range(1, colorStopsCount):
 
         for j in range(0, sectionLength):
-
             print(f"\x1b[38;2;{r};{g};{b}m" + string[j + index], end = '')
 
             r += int((colorArr[i]["r"] - r)/sectionLength)
