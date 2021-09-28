@@ -7,42 +7,12 @@ import sys, math
 #         sys.stdout.write(u"\u001b[38;5;" + code + "m " + code.ljust(4))
 #     print (u"\u001b[0m")
 
-class colors:
-    red_to_pink = 160
-    orange_to_magenta = 202
-    green_to_blue = 28
-    # need to list all gradients, come up with scalable names
-
-def gradient(string, color):
-
-    # if not colors[color]:
-    #     print('bruh pick again')
-
-    length = len(string)
-    index = 0
-    section = math.ceil(length/5) + index
-    array = []
-
-    for i in range(0, 5):
-        array.append(string[index:section])
-        index += math.ceil(length/5)
-        section = math.ceil(length/5) + index
-
-    for j in range(0, 5):
-        code = str(color + j)
-        sys.stdout.write(u"\u001b[38;5;" + code + "m" + array[j])
-
-    print (u"\u001b[0m")
-
-# gradient("Hello, tester.", colors.red_to_pink)
-# gradient("iridi - beautify your console.logs", colors.orange_to_magenta)
-
-
-
 def testgradient(string, colorArr, bold=False):
 
     length = len(string)
     colorStops = len(colorArr);
+    sectionLength = math.floor(length/(colorStops - 1))
+    diffs = {}
 
     if type(colorArr[0]) == str and colorArr[0].startswith("#"):
         for i in range(0, colorStops):
@@ -59,23 +29,24 @@ def testgradient(string, colorArr, bold=False):
     g = int(colorArr[0]["g"])
     b = int(colorArr[0]["b"])
 
-    for i in range(0, colorStops):
-        diffR = int(colorArr[1]["r"] - r)
-        diffG = int(colorArr[1]["g"] - g)
-        diffB = int(colorArr[1]["b"] - b)
-
     print('\033[1m') if bold else ''
 
-    for i in range(0, length):
+    index = 0
 
-        print(f"\x1b[38;2;{r};{g};{b}m" + string[i], end = '')
+    for i in range(1, colorStops):
 
-        r += int(diffR/length)
-        g += int(diffG/length)
-        b += int(diffB/length)
+        for j in range(0, sectionLength):
+
+            print(f"\x1b[38;2;{r};{g};{b}m" + string[j + index], end = '')
+
+            r += int((colorArr[i]["r"] - r)/sectionLength)
+            g += int((colorArr[i]["g"] - g)/sectionLength)
+            b += int((colorArr[i]["b"] - b)/sectionLength)
+
+        index += sectionLength
 
     print (u"\u001b[0m")
 
-testgradient("Try this string I suppose maybe even a longer one if I want", [{"r": 238, "g": 9, "b": 121}, {"r": 255, "g": 106, "b": 0}], bold=True)
-testgradient("Try this string I suppose maybe even a longer one if I want", [{"r": 238, "g": 9, "b": 121}, {"r": 255, "g": 106, "b": 0}])
-testgradient("Try this string I suppose maybe even a longer one if I want", ["#fafa3b", "#ab8290"])
+
+testgradient("iridi - beautify your command line interfaces\n", ["#12c2e9", "#c471ed", "#f64f59"], bold=True)
+testgradient("iridi - beautify your command line interfaces\n", ["#ff00cc", "#ff0000"], bold=True)
