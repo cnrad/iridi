@@ -1,11 +1,4 @@
-import sys, math
-
-# # Print all colors
-# for i in range(0, 16):
-#     for j in range(0, 16):
-#         code = str(i * 16 + j)
-#         sys.stdout.write(u"\u001b[38;5;" + code + "m " + code.ljust(4))
-#     print (u"\u001b[0m")
+import math
 
 def iridi(string, colorArr, bold=False):
 
@@ -32,8 +25,7 @@ def iridi(string, colorArr, bold=False):
 
     index = 0
 
-    for i in range(1, colorStopsCount):
-
+    for i in range(1, colorStopsCount):   
         for j in range(0, sectionLength):
             print(f"\x1b[38;2;{r};{g};{b}m" + string[j + index], end = '')
 
@@ -43,9 +35,8 @@ def iridi(string, colorArr, bold=False):
 
         index += sectionLength
 
-    print (u"\u001b[0m")
+        if (i + 1 == colorStopsCount) and index < length:
+            print(f"\x1b[38;2;{r};{g};{b}m" + string[index], end = '')
+        
 
-
-iridi("iridi - beautify your command line interfaces\n", ["#ff00cc", "#ff0000"], bold=True)
-iridi("█████████████████████████████████████████████████████████████████ \n", ["#00ff00", "#ff0000", "#0000ff"], bold=False)
-
+    print(u"\u001b[0m")
