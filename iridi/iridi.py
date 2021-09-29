@@ -1,6 +1,5 @@
-import math
+import math, builtins
 from typing import Union, Dict, List
-import builtins
 from .presets import presets as iridipresets
 
 presets = iridipresets

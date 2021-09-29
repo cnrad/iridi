@@ -9,7 +9,7 @@ except ImportError:
 # This call to setup() does all the work
 setuptools.setup(
     name="iridi",
-    version="1.0.1",
+    version="1.1.0",
     description="Beautify your command line interfaces",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
