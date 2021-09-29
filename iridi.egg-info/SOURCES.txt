@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+iridi/__init__.py
+iridi/iridi.py
+iridi/presets.py
+iridi.egg-info/PKG-INFO
+iridi.egg-info/SOURCES.txt
+iridi.egg-info/dependency_links.txt
+iridi.egg-info/top_level.txt
