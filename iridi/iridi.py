@@ -1,12 +1,14 @@
 import math
+from typing import Union, Dict, List
 
-def iridi(string, colorArr, bold=False):
+
+def iridi(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False):
 
     length = len(string)
-    colorStopsCount = len(colorArr);
+    colorStopsCount = len(colorArr)
     sectionLength = math.floor(length/(colorStopsCount - 1))
 
-    if type(colorArr[0]) == str and colorArr[0].startswith("#"):
+    if isinstance(colorArr[0], str) and colorArr[0].startswith("#"):
         for i in range(0, colorStopsCount):
             color = colorArr[i].lstrip("#")
             rgbColors = tuple(int(color[i:i+2], 16) for i in (0, 2, 4))
@@ -25,9 +27,9 @@ def iridi(string, colorArr, bold=False):
 
     index = 0
 
-    for i in range(1, colorStopsCount):   
+    for i in range(1, colorStopsCount):
         for j in range(0, sectionLength):
-            print(f"\x1b[38;2;{r};{g};{b}m" + string[j + index], end = '')
+            print(f"\x1b[38;2;{r};{g};{b}m" + string[j + index], end='')
 
             r += int((colorArr[i]["r"] - colorArr[i - 1]["r"])/sectionLength)
             g += int((colorArr[i]["g"] - colorArr[i - 1]["g"])/sectionLength)
@@ -36,7 +38,6 @@ def iridi(string, colorArr, bold=False):
         index += sectionLength
 
         if (i + 1 == colorStopsCount) and index < length:
-            print(f"\x1b[38;2;{r};{g};{b}m" + string[index], end = '')
-        
+            print(f"\x1b[38;2;{r};{g};{b}m" + string[index], end='')
 
     print(u"\u001b[0m")
