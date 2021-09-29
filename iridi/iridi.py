@@ -23,7 +23,8 @@ def iridi(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = 
     g = int(colorArr[0]["g"])
     b = int(colorArr[0]["b"])
 
-    print('\033[1m') if bold else ''
+    if bold:
+        print('\033[1m', end="")
 
     index = 0
 
