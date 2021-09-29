@@ -1,3 +1,4 @@
 dist
 /iridi/__pycache__/
 /iridi/iridi.egg-info/
+/iridi.egg-info/
