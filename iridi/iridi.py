@@ -1,7 +1,11 @@
 import math
 from typing import Union, Dict, List
+from .presets import presets as iridipresets
 
 class iridi:
+
+    presets = iridipresets
+
     def print(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False):
 
         length = len(string)
