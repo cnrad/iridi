@@ -26,10 +26,10 @@ The above should result in this:
 The array can be an array of hex strings, or objects with r, g, and b values. This...
 ```
 # This works:
-iridi("Try it with RGB objects!", ["#7350b3", "#2ebf91"])
+iridi("Try it with hex values!", ["#7350b3", "#2ebf91"])
 
 # So does this:
-iridi("Try it with hex values!", [{"r": 250, "g": 0, "b": 100}, {"r": 60, "g": 255, "b": 0}])
+iridi("Try it with RGB objects!", [{"r": 250, "g": 0, "b": 100}, {"r": 60, "g": 255, "b": 0}])
 ```
 ...results in the following:
 
