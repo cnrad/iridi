@@ -2,10 +2,6 @@ import builtins
 import math
 from typing import Union, Dict, List
 
-from .presets import presets as iridipresets
-
-presets = iridipresets
-
 
 def print(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False):
     preset(colorArr).print(string, bold)
