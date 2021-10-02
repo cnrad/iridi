@@ -13,11 +13,14 @@ pip install iridi
 ```py
 import iridi
 
-# Create gradient text
+# Print gradient text
 # iridi.print(message, colors, options)
 
 # Ask for input with gradient text:
 # iridi.input(message, colors, options)
+
+# Get output of gradient text:
+# beautiful_message = iridi.beautify(message, colors, options)
 
 iridi.print("This is an example message. Colorful, huh?", ["#8A2387", "#E94057", "#F27121"], bold=True)
 response = iridi.input("What's your favorite color?", ["#8A2387", "#E94057", "#F27121"])
@@ -36,7 +39,7 @@ There are included presets when importing the module, access them by doing ```ir
 ```py
 import iridi
 
-iridi.print("Nice preset!", iridi.presets.wiretap)
+iridi.presets.wiretap.print("Nice preset!")
 ```
 
 ![image](https://user-images.githubusercontent.com/83192247/135200859-12f802fb-22d6-4e2a-9fb6-4bd0769fce18.png)
