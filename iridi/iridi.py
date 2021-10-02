@@ -11,8 +11,12 @@ def print(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = 
     preset(colorArr).print(string, bold)
 
 
-def input(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False):
-    preset(colorArr).input(string, bold)
+def input(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False) -> str:
+    return preset(colorArr).input(string, bold)
+
+
+def beautify(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False) -> str:
+    return preset(colorArr).beautify(string, bold)
 
 
 class preset:
@@ -29,7 +33,7 @@ class preset:
         finalStr = ''
 
         if isinstance(colorArr[0], str) and colorArr[0].startswith("#"):
-            for i in range(0, colorStopsCount):
+            for i in range(colorStopsCount):
                 color = colorArr[i].lstrip("#")
                 rgbColors = tuple(int(color[i:i + 2], 16) for i in (0, 2, 4))
 
@@ -49,7 +53,7 @@ class preset:
         index = 0
 
         for i in range(1, colorStopsCount):
-            for j in range(0, sectionLength):
+            for j in range(sectionLength):
                 finalStr += (f"\x1b[38;2;{r};{g};{b}m" + string[j + index])
 
                 r += int((colorArr[i]["r"] - colorArr[i - 1]["r"]) / sectionLength)
