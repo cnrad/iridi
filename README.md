@@ -79,6 +79,9 @@ iridi.print("Try it with hex values if you haven't!", [{"r": 250, "g": 0, "b": 1
 
 Want the output in bold? No problem, just add `bold=True` as the third argument to the function (shown in examples above).
 
+Same goes for italic, just add `italic=True` as the another argument to the function.
+
+
 --------
 
 If you end up using this, or just think it's cool, feel free to :star: this repo, it means a lot :)
