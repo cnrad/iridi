@@ -3,23 +3,23 @@ import math
 from typing import Union, Dict, List
 
 
-def print(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False):
-    preset(colorArr).print(string, bold)
+def print(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False, italic: bool = False):
+    preset(colorArr).print(string, bold, italic)
 
 
-def input(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False) -> str:
-    return preset(colorArr).input(string, bold)
+def input(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False, italic: bool = False) -> str:
+    return preset(colorArr).input(string, bold, italic)
 
 
-def beautify(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False) -> str:
-    return preset(colorArr).beautify(string, bold)
+def beautify(string: str, colorArr: Union[Dict[str, int], List[str]], bold: bool = False, italic: bool = False) -> str:
+    return preset(colorArr).beautify(string, bold, italic)
 
 
 class preset:
     def __init__(self, colorArr):
         self.colorArr = colorArr
 
-    def beautify(self, string: str, bold: bool = False) -> str:
+    def beautify(self, string: str, bold: bool = False, italic: bool = False) -> str:
 
         colorArr = self.colorArr
 
@@ -61,10 +61,12 @@ class preset:
             if (i + 1 == colorStopsCount) and index < length:
                 finalStr += (f"\x1b[38;2;{r};{g};{b}m" + string[index])
 
+        if (italic): return "\x1B[3m" + finalStr + u"\u001b[0m" + "\x1B[23m"
+
         return finalStr + u"\u001b[0m"
 
-    def print(self, string: str, bold: bool = False):
-        builtins.print(self.beautify(string, bold))
+    def print(self, string: str, bold: bool = False, italic: bool = False):
+        builtins.print(self.beautify(string, bold, italic))
 
-    def input(self, string: str, bold: bool = False):
-        return builtins.input(self.beautify(string, bold))
+    def input(self, string: str, bold: bool = False, italic: bool = False):
+        return builtins.input(self.beautify(string, bold, italic))
